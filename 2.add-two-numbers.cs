@@ -26,23 +26,27 @@ public class Solution {
         Console.WriteLine(num2);
         Console.WriteLine(sum);
 
-        var result = new ListNode((int)(sum % 10)); // Cast long to int
+        // Create the result linked list
+        var result = new ListNode((int)(sum % 10)); // Cast BigInteger to int
         var original = result;
-        while(sum / 10 != 0){
-            sum = sum / 10;
-            result.next = new ListNode((int)(sum % 10)); // Cast long to int
+        sum /= 10;
+
+        // Continue adding nodes for the rest of the sum
+        while (sum != 0) {
+            result.next = new ListNode((int)(sum % 10)); // Cast BigInteger to int
+            sum /= 10;
             result = result.next;
         }
 
         return original;
     }
 
-    public long ConvertToNumber(ListNode l){
-        long num = 0;
-        long offset = 1;
-        while(l != null){
-            num = num + (long)l.val * offset;
-            offset = offset * 10L;
+    public BigInteger ConvertToNumber(ListNode l) {
+        BigInteger num = 0;
+        BigInteger offset = 1;
+        while (l != null) {
+            num += (BigInteger)l.val * offset;
+            offset *= 10;
             l = l.next;
         }
         return num;
