@@ -7,13 +7,12 @@
 // @lc code=start
 public class Solution {
     public int LongestCommonPrefix(int[] arr1, int[] arr2) {
+        var strArr1 = arr1.Select(x => x.ToString()).OrderBy(x => x).ToList();
+        var strArr2 = arr2.Select(x => x.ToString()).OrderBy(x => x).ToList();
         var longestCommonPrefixLength = 0;
 
-        foreach (int x in arr1) {
-            foreach (int y in arr2) {
-                var strX = x.ToString();
-                var strY = y.ToString();
-
+        foreach (var strX in strArr1) {
+            foreach (var strY in strArr2) {
                 var commonPrefixLength = 0;
                 for (int i = 0; i < Math.Min(strX.Length, strY.Length); i++) {
                     if (strX[i] == strY[i]) {
