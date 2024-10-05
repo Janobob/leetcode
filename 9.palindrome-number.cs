@@ -7,10 +7,18 @@
 // @lc code=start
 public class Solution {
     public bool IsPalindrome(int x) {
-        var xS = x.ToString();
+        if (x < 0) {
+            return false;
+        }
 
-        for(int i = 0; i < xS.Length / 2; i++) {
-            if(xS[i] != xS[xS.Length - 1 - i]) {
+        var amountOfDigits = (int)Math.Floor(Math.Log10(x) + 1);
+        var firstDigit = 0;
+        var lastDigit = 0;
+
+        for (int i = 0; i < amountOfDigits / 2; i++) {
+            firstDigit = (int)(x / Math.Pow(10, amountOfDigits - i - 1)) % 10;
+            lastDigit = (int)(x / Math.Pow(10, i)) % 10;
+            if (firstDigit != lastDigit) {
                 return false;
             }
         }
