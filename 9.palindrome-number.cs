@@ -8,24 +8,14 @@
 public class Solution {
     public bool IsPalindrome(int x) {
         var xS = x.ToString();
-        string xSR = Reverse(xS);
-        for(int i = 0; i < xS.Length; i++){
-            if(xS[i] != xSR[i]){
+
+        for(int i = 0; i < xS.Length / 2; i++) {
+            if(xS[i] != xS[xS.Length - 1 - i]) {
                 return false;
             }
         }
 
         return true;
-    }
-
-    public string Reverse(string text)
-    {
-        if (text == null) return null;
-
-        // this was posted by petebob as well 
-        char[] array = text.ToCharArray();
-        Array.Reverse(array);
-        return new String(array);
     }
 }
 // @lc code=end
