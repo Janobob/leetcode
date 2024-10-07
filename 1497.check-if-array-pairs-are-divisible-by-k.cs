@@ -10,10 +10,7 @@ public class Solution {
         var remainders = new Dictionary<int, int>();
 
         foreach (var num in arr) {
-            var remainder = num % k;
-
-            // keep the remainder positive
-            remainder = remainder < 0 ? remainder + k : remainder;
+            var remainder = (num % k + k) % k;
 
             if(remainders.ContainsKey(remainder)) {
                 remainders[remainder]++;
