@@ -7,13 +7,16 @@
 // @lc code=start
 public class Solution {
     public bool ContainsDuplicate(int[] nums) {
-        var set = new HashSet<int>();
+        var set = new Dictionary<int, int>();
 
         foreach(var num in nums){
-            set.Add(num);
+            if(set.ContainsKey(num)){
+                return true;
+            }
+            set.Add(num, 1);
         }
 
-        return set.Count != nums.Length;
+        return false;
     }
 }
 // @lc code=end
