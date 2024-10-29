@@ -7,23 +7,23 @@
 // @lc code=start
 public class Solution {
     public bool IsAnagram(string s, string t) {
-        var mapOrigin = new Dictionary<char, int>();
-
         if(s.Length != t.Length) {
             return false;
         }
 
+        var map = new int[26];
+
         foreach(var c in s) {
-            if(mapOrigin.ContainsKey(c)) {
-                mapOrigin[c]++;
+            if(map[c - 'a'] == 0) {
+                map[c - 'a'] = 1;
             } else {
-                mapOrigin[c] = 1;
+                map[c - 'a']++;
             }
         }
 
         foreach(var c in t) {
-            if(mapOrigin.ContainsKey(c)) {
-                if(--mapOrigin[c] < 0) {
+            if(map[c - 'a'] != 0) {
+                if(--map[c - 'a'] < 0) {
                     return false;
                 }
             } else {
