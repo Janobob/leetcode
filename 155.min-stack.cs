@@ -7,31 +7,29 @@
 // @lc code=start
 public class MinStack {
 
-    private readonly Stack<int> _stack;
-    private readonly Stack<int> _minStack;
+    private Node _root;
+
+    record Node(int val, int min, Node prev) {}
 
     public MinStack() {
-        _stack = new Stack<int>();
-        _minStack = new Stack<int>();
+        _root = new(int.MaxValue,int.MaxValue,null);
     }
     
     public void Push(int val) {
-        _stack.Push(val);
-        val = Math.Min(val, _minStack.Count == 0 ? val : _minStack.Peek());
-        _minStack.Push(val);
+        Node n = new(val, Math.Min(val, _root.min), _root);
+        _root = n;
     }
     
     public void Pop() {
-        _stack.Pop();
-        _minStack.Pop();
+        _root = _root.prev;
     }
     
     public int Top() {
-        return _stack.Peek();
+        return _root.val;
     }
     
     public int GetMin() {
-        return _minStack.Peek();
+        return _root.min;
     }
 }
 
